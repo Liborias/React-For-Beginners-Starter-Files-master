@@ -1,14 +1,21 @@
 import React from "react";
+import { getFunName } from "../helpers";
 
 class StorePicker extends React.Component {
   render() {
     return (
       <React.Fragment>
         <form className="store-selector">
-          <h2>Please enter a store</h2>
-          <input type="text" required placeholder="Store Name" />
+          <h2>Please Enter A Store</h2>
+          <input
+            type="text"
+            required
+            placeholder="Store Name"
+            defaultValue={getFunName()}
+          />
+
           {/*required vyhazuje hlášku "vyplňte prosím toto pole" když se pak zmáčkne button, kde je to asi provázané se submit*/}
-          <button type="submit">VISIT STORE →</button>
+          <button type="submit">Visit Store →</button>
         </form>
         {/*Když chci něco komentovat a je nutné  to dělat uvnitř tagu, vně tagu to nebude fungovat
         <p>
