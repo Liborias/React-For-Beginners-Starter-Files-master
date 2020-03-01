@@ -9,11 +9,10 @@ class StorePicker extends React.Component {
   //   this.goToStore = this.goToStore.bind(this);
   // } takto pomocí constructoru se bindovala funkce s this dříve
 
-
-  goToStore = (event) => {
+  goToStore = event => {
     event.preventDefault();
-    console.log(this.goToStore);
-  }
+    console.log(this.myInput.value.value); // toto nefunguje, Wesbosovi jo, Proč?
+  };
   // console.log() odkazuje na výpis toho co je v this, tentokrát v this.goToStore, arrow function naváže funkci přímo na this, bez ní by bylo nutné provést složitý binding, který se dělával dříve
 
   render() {
