@@ -4,6 +4,7 @@ import Order from "./Order";
 import Inventory from "./Inventory";
 import sampleFishes from "../sample-fishes";
 import Fish from "./Fish";
+import base from "../base";
 
 class App extends React.Component {
   state = {
@@ -21,6 +22,20 @@ class App extends React.Component {
   };
 
   loadSampleFishes = () => {
+    // .get() žádá o získání dat, .then() říká, co se má stát až získá data, mezitím pokračují ale další funkce
+    const fff = base
+      .collection("fishes")
+      .get()
+      .then(snapshot => {
+        // snapshot - pojmenuje data která získám funkcí z databáze ve formátu pole
+        snapshot.forEach(doc => {
+          console.log(doc.id, "=>", doc.data().name);
+        });
+      })
+      .catch(err => {
+        console.log("Error getting documents", err);
+      });
+
     this.setState({ fishes: sampleFishes });
   };
 
