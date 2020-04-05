@@ -7,11 +7,12 @@ const firebaseApp = firebase.initializeApp({
   projectId: "fish-shop-5641f",
   storageBucket: "fish-shop-5641f.appspot.com",
   messagingSenderId: "1066388093745",
-  appId: "1:1066388093745:web:93805ef7706b040310ce10"
+  appId: "1:1066388093745:web:93805ef7706b040310ce10",
 });
 //const base = Rebase.createClass(firebaseApp.database());
 // This is named export
 //export { firebaseApp };
 //this is a default export
 const base = firebaseApp.firestore();
+export { firebaseApp };
 export default base;
