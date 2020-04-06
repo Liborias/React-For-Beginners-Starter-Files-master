@@ -9,27 +9,18 @@ import base from "../base";
 class App extends React.Component {
   state = {
     fishes: {},
-    order: {},
+    order: {}
   };
-
+  /*componentDidMount ještě než se tato komponenta zobrazí tak provede to co jí uvnitř přikážu a zobrazí se už s výsledkem */
   componentDidMount() {
     const { params } = this.props.match;
-    const { databaseName } = `${params.storeId}`;
-    this.ref = base
-      .collection(`${databaseName}`)
-      .get() /*`${params.storeId}/fishes` */
-      .then((snapshot) => {
-        // snapshot - pojmenuje data která získám funkcí z databáze ve formátu pole
-        snapshot.forEach((doc) => {
-          console.log(doc.id, "=>", doc.data().name);
-        });
-      })
-      .catch((err) => {
-        console.log("Error getting documents", err);
-      });
+    this.ref = base.syncState(`${params.storeId}/fishes`, {
+      context: this,
+      state: "fishes"
+    });
   }
 
-  addFish = (fish) => {
+  addFish = fish => {
     // 1. Take a copy of existing state
     const fishes = { ...this.state.fishes };
     // 2. add our new fish to the fishes variable
@@ -56,7 +47,7 @@ class App extends React.Component {
     this.setState({ fishes: sampleFishes });
   };
 
-  addToOrder = (key) => {
+  addToOrder = key => {
     // 1. Take a copy of state
     const order = { ...this.state.order };
     //2. Either add to the order or update the number in our order
@@ -71,7 +62,7 @@ class App extends React.Component {
         <div className="menu">
           <Header tagline="Fresh Seafood Market" age={500} />
           <ul className="fishes">
-            {Object.keys(this.state.fishes).map((key) => (
+            {Object.keys(this.state.fishes).map(key => (
               <Fish
                 key={key}
                 index={key}
